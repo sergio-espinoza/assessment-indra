@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'assets/styles/variables';
+
+.w-30rem {
+  width: 30rem;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.flex-rw {
+  display: flex;
+  gap: $material-separator;
+  flex-flow: row wrap;
+}
+
+.plain-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.plain-button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  outline: inherit;
+  padding: 0;
+}
+
+.material-box {
+  padding: $material-separator;
+  box-sizing: border-box;
+  box-shadow: $material-box-shadow;
+}

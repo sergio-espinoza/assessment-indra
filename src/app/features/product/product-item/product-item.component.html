@@ -1,0 +1,13 @@
+@if (product(); as product) {
+  <div class="product">
+    <div class="product__header">
+      <h4>{{ product?.title }}</h4>
+    </div>
+    <div class="product__content">
+      <img [src]="product.thumbnail" width="200" height="200" alt="Product {{ product.id }} Image">
+    </div>
+    <div class="product__actions">
+      <button class="plain-button material-box" (click)="goToDetail(product.id)">Ver Detalles</button>
+    </div>
+  </div>
+}

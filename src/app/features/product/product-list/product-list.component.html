@@ -1,0 +1,5 @@
+<div class="product-list">
+  @for (product of products$ | async; track product.id) {
+    <app-product-item [product]="product" (toDetail)="goToDetail($event)" />
+  }
+</div>
