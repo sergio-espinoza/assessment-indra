@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { ProductItemComponent } from '../product-item/product-item.component';
-import { debounceTime, distinctUntilChanged, filter, of, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, of, switchMap, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { Product, ProductResponse } from '../product.interface';
 import { DEFAULT_LIMIT_SIZE, INITIAL_PAGE } from '../product.constant';
@@ -38,6 +38,19 @@ export class ProductListComponent implements OnInit {
     this._router.navigate(['product', 'detail', id]);
   }
 
+  remove(id: string) {
+    this._productSvc.removeProduct$(id).pipe(
+      switchMap(
+        () => this._productSvc.searchProducts$(
+          this.getParamsToSearch(this.searchControl.value || '')
+        )
+      ),
+      map(response => response.filter(
+        item => !this._productSvc.getRemovedProducts().includes(`${item.id}`)
+      ))
+    ).subscribe(response => this.products$ = of(response));
+  }
+
   initSearchHandler() {
     this.searchControl.valueChanges.pipe(
       debounceTime(500),
@@ -45,7 +58,10 @@ export class ProductListComponent implements OnInit {
       filter(value => (value || '')?.length > 3),
       switchMap(
         value => this._productSvc.searchProducts$(this.getParamsToSearch(value || ''))
-      )
+      ),
+      map(response => response.filter(
+        item => !this._productSvc.getRemovedProducts().includes(`${item.id}`)
+      ))
     ).subscribe(response => this.products$ = of(response));
   }
 
@@ -55,7 +71,11 @@ export class ProductListComponent implements OnInit {
       skip: `${this.productPage()}`,
     }
 
-    this.products$ = this._productSvc.getProducts$(params);
+    this.products$ = this._productSvc.getProducts$(params).pipe(
+      map(response => response.filter(
+        item => !this._productSvc.getRemovedProducts().includes(`${item.id}`)
+      ))
+    );
   }
 
   getParamsToSearch(searchString: string) {

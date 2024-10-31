@@ -5,4 +5,9 @@ export const routes: Routes = [
     path: 'product',
     loadChildren: () => import('./features/product/product.component')
   },
+  {
+    path: '',
+    redirectTo: 'product',
+    pathMatch: 'full'
+  }
 ];

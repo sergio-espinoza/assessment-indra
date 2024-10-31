@@ -12,9 +12,14 @@ export class ProductItemComponent {
   product = input<Product>();
 
   toDetail = output<string>();
+  toRemove = output<string>();
 
   goToDetail(id: number | string) {
     this.toDetail.emit(`${id}`);
+  }
+
+  remove(id: number | string) {
+    this.toRemove.emit(`${id}`);
   }
 
 }

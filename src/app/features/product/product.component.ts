@@ -17,8 +17,7 @@ import { NormalLink } from '../../shared/interfaces';
 })
 export class ProductComponent {
   public links: NormalLink[] = [
-    { route: './list', title: 'LISTA DE PRODUCTOS' },
-    { route: './detail', title: 'DETALLE DEL PRODUCTO SELECCIONADO' },
+    { route: './list', title: 'LISTA DE PRODUCTOS' }
   ];
 }
 

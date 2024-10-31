@@ -3,7 +3,11 @@
 </div>
 <div class="product-list">
   @for (product of products$ | async; track product.id) {
-    <app-product-item [product]="product" (toDetail)="goToDetail($event)" />
+    <app-product-item
+      [product]="product"
+      (toDetail)="goToDetail($event)"
+      (toRemove)="remove($event)"
+    />
   }
 </div>
 <div class="product-pagination">
