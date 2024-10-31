@@ -22,6 +22,19 @@ export class ProductService {
     );
   }
 
+  searchProducts$(params: { [key: string]: string }) {
+    return this._http.get<ProductResponse>(
+      `${environment.apiUrl}/products/search`,
+      { params: this.getQueryParams(params) }
+    ).pipe(
+      map(response => response.products),
+      catchError(error => {
+        console.error(error);
+        return of([]);
+      })
+    );
+  }
+
   getQueryParams(params: { [key: string]: string }): HttpParams {
     let httpParams = new HttpParams();
     for (const key in params) {

@@ -1,5 +1,13 @@
+<div class="product-search">
+  <input type="search" placeholder="Buscar Productos" [formControl]="searchControl" />
+</div>
 <div class="product-list">
   @for (product of products$ | async; track product.id) {
     <app-product-item [product]="product" (toDetail)="goToDetail($event)" />
+  }
+</div>
+<div class="product-pagination">
+  @for (item of [0, 1, 2, 3, 4, 5, 6]; track item) {
+    <button class="plain-button material-box">{{ item + 1 }}</button>
   }
 </div>

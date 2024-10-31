@@ -29,6 +29,13 @@
   padding: 0;
 }
 
+.ellipsis-text {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .material-box {
   padding: $material-separator;
   box-sizing: border-box;

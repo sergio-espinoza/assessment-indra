@@ -1,6 +1,18 @@
+.product-search {
+  padding: 1rem 0;
+}
+
 .product-list {
   box-sizing: border-box;
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.product-pagination {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+  padding-top: 3rem;
 }
