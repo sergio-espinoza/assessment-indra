@@ -1,0 +1,11 @@
+.product {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 0.5rem 4rem calc(100vh - 6.5rem) 0.5rem;
+  padding: 0 1rem;
+  gap: 0.5rem;
+
+  &__links {
+    place-self: center flex-start;
+  }
+}

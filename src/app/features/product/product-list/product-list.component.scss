@@ -1,20 +1,23 @@
-.product-search {
-  padding: 1rem 0;
-}
-
 .product-list {
-  box-sizing: border-box;
   display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  height: 100%;
+  gap: 0.5rem;
+
+  &__content {
+    box-sizing: border-box;
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+    overflow: auto;
+  }
 }
 
 .product-pagination {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   justify-content: center;
   width: 100%;
-  padding-top: 3rem;
 }
 
 .selected-page {

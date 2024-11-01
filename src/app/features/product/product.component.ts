@@ -6,14 +6,8 @@ import { NormalLink } from '../../shared/interfaces';
   selector: 'app-product',
   standalone: true,
   imports: [RouterOutlet, RouterLink],
-  template: `
-    <div class="flex-rw">
-      @for (link of links; track link.route) {
-        <a class="plain-link material-box" [routerLink]="link.route">{{ link.title }}</a>
-      }
-    </div>
-    <router-outlet />
-  `
+  templateUrl: './product.component.html',
+  styleUrl: './product.component.scss'
 })
 export class ProductComponent {
   public links: NormalLink[] = [

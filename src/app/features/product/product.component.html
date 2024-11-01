@@ -1,0 +1,12 @@
+<div class="product">
+  <div></div>
+  <div class="product__links">
+    @for (link of links; track link.route) {
+      <a class="plain-link material-box" [routerLink]="link.route">{{ link.title }}</a>
+    }
+  </div>
+  <div class="product__routes">
+    <router-outlet />
+  </div>
+  <div></div>
+</div>

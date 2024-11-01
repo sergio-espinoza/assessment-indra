@@ -36,7 +36,7 @@ export class ProductDetailComponent {
 
   updateProduct() {
     this._ProductSvc.updateProduct$(
-      `${this.product()?.id}`, this.productForm.value as any
+      `${this.product()?.id}`, this.productForm.value as Partial<Product>
     ).subscribe(
       response => this.product.set(response)
     );
