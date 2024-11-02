@@ -8,6 +8,7 @@
     @for (product of products$ | async; track product.id) {
       <app-product-item
         [product]="product"
+        [editedProduct]="updatedProducts[product.id]"
         (toDetail)="goToDetail($event)"
         (toRemove)="remove($event)"
       />

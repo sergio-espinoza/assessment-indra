@@ -1,0 +1,20 @@
+.editable-field {
+  .value-field {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .edit-field {
+    display: none;
+  }
+
+  &.active {
+    .value-field {
+      display: none;
+    }
+
+    .edit-field {
+      display: block;
+    }
+  }
+}

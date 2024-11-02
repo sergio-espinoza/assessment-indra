@@ -1,10 +1,12 @@
-@if (product(); as product) {
+@if (editedProduct() || product(); as product) {
   <div class="product">
     <div class="product__header">
       <h4 class="ellipsis-text">{{ product?.title }}</h4>
     </div>
     <div class="product__content">
-      <img [src]="product.thumbnail" width="250" height="250" alt="Product {{ product.id }} Image">
+      <img
+        priority="low"
+        [src]="product.thumbnail" width="250" height="250" alt="Product {{ product.id }} Image" />
     </div>
     <div class="product__actions">
       <button class="plain-button material-box" (click)="goToDetail(product.id)">Ver Detalles</button>

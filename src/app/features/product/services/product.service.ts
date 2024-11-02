@@ -9,7 +9,7 @@ import { catchError, map, of, tap } from 'rxjs';
 export class ProductService {
   private _http = inject(HttpClient);
 
-  private updatedProducts: Record<any, any> = {};
+  private updatedProducts: Record<any, Product> = {};
   private removedProducts: string[] = [];
 
   getUpdatedProducts() {

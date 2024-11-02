@@ -1,21 +1,37 @@
 @if (product(); as product) {
 <div class="product-detail">
-
-  <div class="product-detail__header">
-    <h4 class="ellipsis-text">{{ product?.title }}</h4>
-  </div>
-  <div class="product-detail__content">
-    <img [src]="product.thumbnail" width="250" height="350" alt="Product {{ product.id }} Image" />
-    <p>{{ product.description }}</p>
-
-    <div class="product-detail__payment">
-      <p>Precio: {{ product.price }}</p>
-      <p>Puntuación: {{ product.rating }}</p>
-      <p>Cantidad en stock: {{ product.stock }}</p>
+  <form [formGroup]="productForm">
+    <div class="product-detail__header">
+      <app-editable-field
+        [form]="productForm"
+        controlName="title" (toActive)="activeEditable($event, 'title')">
+        <h4 #editableContentEl>{{ productForm.value.title }}</h4>
+      </app-editable-field>
     </div>
-  </div>
-  <div class="product-detail__actions">
-    <button class="plain-button material-box" (click)="updateProduct()">Guardar</button>
-  </div>
+    <div class="product-detail__content">
+      <img
+        [ngSrc]="product.thumbnail"
+        priority="high"
+        width="350" height="350"
+        alt="Product {{ product.id }} Image"
+        />
+
+      <app-editable-field
+        [form]="productForm"
+        controlName="description" (toActive)="activeEditable($event, 'description')">
+        <p #editableContentEl>{{ productForm.value.description }}</p>
+      </app-editable-field>
+
+      <div class="product-detail__payment">
+        <p>Precio: {{ product.price }}</p>
+        <p>Puntuación: {{ product.rating }}</p>
+        <p>Cantidad en stock: {{ product.stock }}</p>
+      </div>
+    </div>
+    <div class="product-detail__actions">
+      <button class="plain-button material-box" (click)="sendToUpdate()">Guardar</button>
+    </div>
+
+  </form>
 </div>
 }

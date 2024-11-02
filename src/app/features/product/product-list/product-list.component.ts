@@ -1,9 +1,9 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { ProductItemComponent } from '../product-item/product-item.component';
-import { debounceTime, distinctUntilChanged, filter, map, of, Subscription, switchMap, tap } from 'rxjs';
+import { debounceTime, filter, map, of, Subscription, switchMap, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { Product, ProductResponse } from '../product.interface';
+import { Product } from '../product.interface';
 import { DEFAULT_LIMIT_SIZE, INITIAL_PAGE } from '../product.constant';
 import { ProductService } from '../services';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators as Vl } from '@angular/forms';
@@ -11,13 +11,20 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators as Vl } from '@
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [RouterOutlet, ProductItemComponent, ReactiveFormsModule, AsyncPipe],
+  imports: [
+    RouterOutlet,
+    ProductItemComponent,
+    ReactiveFormsModule,
+    AsyncPipe
+  ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   private _router = inject(Router);
   private _productSvc = inject(ProductService);
+
+  public updatedProducts: Record<string, Product> = {};
 
   filterForm = new FormGroup({
     search: new FormControl('', [Vl.required]),
@@ -35,6 +42,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initSearchHandler();
     this.loadProducts();
+    this.updatedProducts = this._productSvc.getUpdatedProducts();
   }
 
   goToDetail(id: string) {
